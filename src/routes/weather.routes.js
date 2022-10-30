@@ -7,7 +7,12 @@ const { format } = require('date-fns');
 
 function transformData(data) {
 
-  const hourly = data.hourly.splice(0, 24)
+  const hourly = data.hourly.splice(0, 24).map(obj => {
+    return {
+      time: new Date(obj.dt),
+      temp: obj.temp
+    }
+  })
   const threeDay = data.daily.splice(0, 3).map(obj => {
     return {
       temp: obj.temp.day,
